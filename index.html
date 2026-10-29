@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Personal academic website of Sourav Das, Ph.D. Scholar in Mathematics at IIT Kharagpur. Research in Bayesian optimization, Gaussian processes, and optimization under uncertainty.">
+  <meta name="theme-color" content="#101827">
+  <title>Sourav Das | Mathematical Optimization & Probabilistic AI</title>
+  <style>
+    :root {
+      --bg: #f7f8fb; --paper: #fff; --ink: #172033; --muted: #667085;
+      --line: #e5e9f0; --navy: #101827; --blue: #2859c5; --teal: #168b83;
+      --pale: #edf3ff; --shadow: 0 16px 42px rgba(21, 35, 64, .07);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 84px; }
+    body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.7 Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    a { color: var(--blue); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .nav { position: sticky; top: 0; z-index: 10; background: rgba(16,24,39,.96); backdrop-filter: blur(14px); color: #fff; border-bottom: 1px solid rgba(255,255,255,.1); }
+    .nav-inner { max-width: 1120px; margin: auto; padding: 0 24px; height: 70px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .brand { color: #fff; font-weight: 750; letter-spacing: -.03em; font-size: 1.05rem; white-space: nowrap; }
+    .links { display: flex; gap: 22px; align-items: center; }
+    .links a { color: #d9e2f3; font-size: .88rem; }
+    .menu { display: none; background: transparent; color: #fff; border: 1px solid #526078; border-radius: 8px; padding: 7px 10px; }
+    .hero { background: radial-gradient(ellipse at 82% 15%, rgba(39,102,202,.28), transparent 35%), linear-gradient(135deg,#101827 0%,#172844 70%,#143b4a 100%); color: #fff; padding: 88px 24px 78px; }
+    .hero-inner { max-width: 1120px; margin: auto; display: grid; grid-template-columns: 1.5fr .8fr; align-items: center; gap: 56px; }
+    .eyebrow { color: #9ec5ff; font-size: .78rem; text-transform: uppercase; letter-spacing: .16em; font-weight: 750; }
+    h1 { font-size: clamp(2.8rem, 6vw, 5rem); line-height: 1.04; letter-spacing: -.055em; margin: 16px 0 18px; }
+    .hero p { max-width: 690px; color: #d5dfef; font-size: 1.08rem; }
+    .hero .lead { color: #fff; font-size: 1.25rem; font-weight: 550; line-height: 1.5; }
+    .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; border-radius: 10px; padding: 11px 17px; font-weight: 700; font-size: .92rem; border: 1px solid transparent; transition: transform .15s ease, background .15s ease; }
+    .btn:hover { text-decoration: none; transform: translateY(-2px); }
+    .btn-primary { background: #fff; color: #12203a; }
+    .btn-outline { color: #fff; border-color: #60718b; background: rgba(255,255,255,.04); }
+    .monogram-card { justify-self: end; width: min(100%, 300px); aspect-ratio: 4/4.5; border: 1px solid rgba(255,255,255,.18); border-radius: 28px; background: linear-gradient(145deg,rgba(255,255,255,.12),rgba(255,255,255,.025)); display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; box-shadow: 0 30px 80px rgba(0,0,0,.2); }
+    .monogram-card:before,.monogram-card:after { content:""; position:absolute; border:1px solid rgba(158,197,255,.25); border-radius:50%; width:280px;height:280px; }
+    .monogram-card:after { width:390px;height:390px; }
+    .monogram { position: relative; z-index: 1; font-size: 5.2rem; font-weight: 800; letter-spacing: -.08em; color: #e8f1ff; }
+    .monogram-caption { position:absolute; bottom:22px; z-index:1; color:#b8c8df; font-size:.72rem; letter-spacing:.12em; text-transform:uppercase; }
+    .portrait-card { background: #17364b; }
+    .profile-photo { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center 24%; }
+    .portrait-card:before, .portrait-card:after { z-index:1; pointer-events:none; }
+    .portrait-card .monogram-caption { left:12px; right:12px; text-align:center; padding:8px 6px; border-radius:8px; background:rgba(16,24,39,.72); }
+    .stats { max-width: 1120px; margin: -24px auto 0; padding: 0 24px; display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; position: relative; }
+    .stat { background: var(--paper); border: 1px solid var(--line); box-shadow: var(--shadow); border-radius: 14px; padding: 20px 22px; }
+    .stat strong { display: block; font-size: 1rem; letter-spacing: -.01em; }
+    .stat span { display:block; color:var(--muted); font-size:.85rem; margin-top:3px; }
+    main { max-width: 1120px; padding: 0 24px; margin: auto; }
+    section { padding: 76px 0 0; }
+    .section-head { margin-bottom: 26px; }
+    .kicker { color: var(--teal); font-size:.76rem; font-weight:800; letter-spacing:.15em; text-transform:uppercase; }
+    h2 { margin: 7px 0 0; font-size: clamp(1.8rem,3vw,2.55rem); line-height:1.2; letter-spacing:-.04em; }
+    .section-intro { color:var(--muted); max-width:750px; margin:12px 0 0; }
+    .about-grid { display:grid; grid-template-columns:1.25fr .75fr; gap:26px; }
+    .panel { background:var(--paper); border:1px solid var(--line); border-radius:18px; padding:28px; box-shadow:0 8px 26px rgba(21,35,64,.035); }
+    .panel p:first-child { margin-top:0; } .panel p:last-child { margin-bottom:0; }
+    .tags { display:flex; flex-wrap:wrap; gap:9px; margin-top:20px; }
+    .tag { background:var(--pale); color:#234b9b; border:1px solid #dce7ff; border-radius:999px; padding:6px 11px; font-size:.82rem; font-weight:650; }
+    .focus-list { display:grid; gap:15px; }
+    .focus { display:flex; gap:12px; align-items:flex-start; }
+    .focus-icon { display:grid; place-items:center; width:38px;height:38px; flex:0 0 38px; border-radius:11px; background:#eaf7f5; color:#11766e; font-weight:800; }
+    .focus strong { display:block; font-size:.95rem; }
+    .focus span { display:block; color:var(--muted); font-size:.86rem; line-height:1.5; }
+    .cards { display:grid; grid-template-columns:repeat(2,1fr); gap:16px; }
+    .research-card { background:var(--paper); border:1px solid var(--line); border-radius:16px; padding:24px; transition:transform .2s,box-shadow .2s; }
+    .research-card:hover { transform:translateY(-3px); box-shadow:var(--shadow); }
+    .number { color:var(--teal); font-size:.76rem; font-weight:800; letter-spacing:.12em; }
+    h3 { font-size:1.12rem; letter-spacing:-.02em; line-height:1.35; margin:8px 0; }
+    .research-card p { color:var(--muted); margin:0; font-size:.93rem; }
+    .pub-list { display:grid; gap:14px; }
+    .pub { background:var(--paper); border:1px solid var(--line); border-radius:15px; padding:22px 24px; display:grid; grid-template-columns:80px 1fr; gap:20px; }
+    .year { color:var(--blue); font-weight:800; font-size:1.1rem; }
+    .pub h3 { margin:0 0 6px; }
+    .pub p { color:var(--muted); margin:0; font-size:.91rem; }
+    .pub .venue { color:#334155; font-weight:650; margin-top:7px; }
+    .pub-label { display:inline-block; margin-top:10px; padding:3px 9px; background:#e8f7f1; color:#13744f; border-radius:6px; font-size:.75rem; font-weight:750; }
+    .timeline { display:grid; gap:0; }
+    .timeline-item { display:grid; grid-template-columns:155px 1fr; gap:24px; padding:22px 0; border-bottom:1px solid var(--line); }
+    .timeline-item:first-child { padding-top:0; }
+    .timeline-item:last-child { border-bottom:0; }
+    .date { color:var(--muted); font-size:.9rem; font-weight:700; }
+    .timeline-item h3 { margin:0 0 4px; }
+    .timeline-item p { margin:0; color:var(--muted); font-size:.92rem; }
+    .skills-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:15px; }
+    .skill { background:var(--paper); border:1px solid var(--line); border-radius:14px; padding:20px; }
+    .skill h3 { margin:0 0 8px; }
+    .skill p { margin:0; color:var(--muted); font-size:.9rem; }
+    .contact { background:var(--navy); color:#fff; border-radius:22px; padding:36px; display:flex; justify-content:space-between; align-items:center; gap:30px; }
+    .contact p { color:#c4d0e1; max-width:600px; margin-bottom:0; }
+    .contact .btn { white-space:nowrap; }
+    footer { max-width:1120px; margin:0 auto; padding:35px 24px 45px; display:flex; justify-content:space-between; gap:20px; color:var(--muted); font-size:.84rem; }
+    .footer-links { display:flex; flex-wrap:wrap; gap:16px; }
+    @media(max-width:800px) {
+      .hero-inner { grid-template-columns:1fr; gap:30px; }
+      .monogram-card { display:none; }
+      .about-grid { grid-template-columns:1fr; }
+      .skills-grid { grid-template-columns:1fr 1fr; }
+      .links { display:none; position:absolute; top:70px; left:0; right:0; padding:18px 24px 22px; background:var(--navy); flex-direction:column; align-items:flex-start; border-top:1px solid #334155; }
+      .links.open { display:flex; }
+      .menu { display:block; }
+      .stats { grid-template-columns:1fr; margin-top:18px; }
+      .stat { box-shadow:none; }
+    }
+    @media(max-width:560px) {
+      .hero { padding:64px 22px 48px; }
+      main { padding:0 20px; }
+      .nav-inner { padding:0 20px; }
+      section { padding-top:58px; }
+      .cards,.skills-grid { grid-template-columns:1fr; }
+      .pub { grid-template-columns:1fr; gap:6px; }
+      .timeline-item { grid-template-columns:1fr; gap:4px; }
+      .contact { padding:26px; flex-direction:column; align-items:flex-start; }
+      footer { flex-direction:column; }
+      h1 { font-size:3rem; }
+    }
+    @media(prefers-reduced-motion:reduce) { html{scroll-behavior:auto} *,*:before,*:after{transition:none!important} }
+  </style>
+</head>
+<body>
+  <nav class="nav" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a class="brand" href="#home">Sourav Das<span style="color:#7dd3c7">.</span></a>
+      <button class="menu" id="menuButton" aria-expanded="false" aria-controls="navLinks">Menu</button>
+      <div class="links" id="navLinks">
+        <a href="#about">About</a><a href="#research">Research</a><a href="#publications">Publications</a>
+        <a href="#education">Education</a><a href="#skills">Expertise</a><a href="#contact">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero" id="home">
+    <div class="hero-inner">
+      <div>
+        <div class="eyebrow">Mathematical Optimization · Probabilistic AI</div>
+        <h1>Sourav Das</h1>
+        <p class="lead">Ph.D. Scholar in Mathematics<br>Indian Institute of Technology Kharagpur</p>
+        <p>I develop optimization methods for expensive black-box problems by combining Bayesian optimization, Gaussian processes, and principled uncertainty modelling.</p>
+        <div class="actions">
+          <a class="btn btn-primary" href="#publications">Explore my research ↘</a>
+          <a class="btn btn-outline" href="https://github.com/dassourav0151" target="_blank" rel="noopener">GitHub ↗</a>
+          <a class="btn btn-outline" href="https://scholar.google.com/citations?user=tSssomIAAAAJ&amp;hl=en" target="_blank" rel="noopener">Google Scholar ↗</a>
+        </div>
+      </div>
+      <div class="monogram-card portrait-card" aria-label="Portrait of Sourav Das">
+        <img class="profile-photo" src="profile.jpg" alt="Portrait of Sourav Das">
+        <div class="monogram-caption">Research · Mathematics · AI</div>
+      </div>
+    </div>
+  </header>
+
+  <div class="stats" aria-label="Profile highlights">
+    <div class="stat"><strong>Bayesian Optimization</strong><span>Surrogate-assisted black-box optimization</span></div>
+    <div class="stat"><strong>Uncertainty-aware AI</strong><span>Gaussian processes and probabilistic modelling</span></div>
+    <div class="stat"><strong>Real-world applications</strong><span>Finance, satellite scheduling, fuzzy optimization</span></div>
+  </div>
+
+  <main>
+    <section id="about">
+      <div class="section-head"><div class="kicker">A little about me</div><h2>Mathematical foundations for intelligent decisions.</h2></div>
+      <div class="about-grid">
+        <div class="panel">
+          <p>I am a Ph.D. Scholar in the Department of Mathematics at the Indian Institute of Technology Kharagpur. My research focuses on efficient surrogate-assisted optimization algorithms for expensive black-box problems and decision-making under uncertainty.</p>
+          <p>My work spans trust-region Bayesian optimization, Bayesian fuzzy optimization using Gaussian fuzzy processes, AI-assisted portfolio optimization incorporating financial-news sentiment, and dynamic scheduling for Earth observation satellites. I am also investigating algebraic-geometric approaches to synthetic data generation for scarce and imbalanced datasets.</p>
+          <p>More broadly, I am interested in bringing rigorous mathematical optimization together with machine learning and modern AI to build scalable, interpretable, and uncertainty-aware systems.</p>
+          <div class="tags">
+            <span class="tag">Bayesian Optimization</span><span class="tag">Gaussian Processes</span><span class="tag">Trust Regions</span>
+            <span class="tag">Multi-objective Optimization</span><span class="tag">Machine Learning</span><span class="tag">Synthetic Data</span>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="focus-list">
+            <div class="focus"><div class="focus-icon">01</div><div><strong>Build reliable optimization algorithms</strong><span>Use probabilistic surrogates to reduce expensive function evaluations.</span></div></div>
+            <div class="focus"><div class="focus-icon">02</div><div><strong>Model uncertainty explicitly</strong><span>Represent unknown outcomes and time-varying events through Bayesian methods.</span></div></div>
+            <div class="focus"><div class="focus-icon">03</div><div><strong>Translate theory into applications</strong><span>Apply optimization to finance, satellite scheduling, and fuzzy decision problems.</span></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="research">
+      <div class="section-head"><div class="kicker">Research directions</div><h2>Problems I work on</h2><p class="section-intro">A selection of connected research themes, from methodological development to applied decision-making.</p></div>
+      <div class="cards">
+        <article class="research-card"><div class="number">01 / METHODS</div><h3>Bayesian & Trust-Region Optimization</h3><p>Developing sample-efficient methods such as multiple trust-region Bayesian optimization for costly, black-box objective functions.</p></article>
+        <article class="research-card"><div class="number">02 / PROBABILISTIC MODELLING</div><h3>Gaussian Processes & Fuzzy Optimization</h3><p>Combining Gaussian-process modelling with fuzzy representations to support optimization when data and outcomes are uncertain.</p></article>
+        <article class="research-card"><div class="number">03 / FINANCE</div><h3>Portfolio Optimization</h3><p>Using Bayesian optimization for portfolio allocation, including dynamic settings, risk-aware objectives, and financial-news sentiment.</p></article>
+        <article class="research-card"><div class="number">04 / SCHEDULING</div><h3>Earth Observation Satellite Scheduling</h3><p>Studying scheduling policies that balance predefined observations with capacity reserved for uncertain future emergency requests.</p></article>
+        <article class="research-card"><div class="number">05 / MULTI-OBJECTIVE</div><h3>Multi-objective Bayesian Optimization</h3><p>Exploring trust-region strategies and acquisition methods for expensive problems with multiple competing objectives.</p></article>
+        <article class="research-card"><div class="number">06 / DATA & AI</div><h3>Geometry-aware Synthetic Data</h3><p>Investigating algebraic-geometric ideas for understanding and generating data in scarce or imbalanced learning settings.</p></article>
+      </div>
+    </section>
+
+    <section id="publications">
+      <div class="section-head"><div class="kicker">Selected publications</div><h2>Research outputs</h2><p class="section-intro">Published journal articles and ongoing manuscripts, based on my current CV. Follow the DOI links for the published papers.</p></div>
+      <div class="pub-list">
+        <article class="pub">
+          <div class="year">2026</div>
+          <div><h3>MTRBO: Multiple trust-region based Bayesian optimization</h3><p>Sourav Das, Debjani Chakraborty, and Pabitra Mitra.</p><p class="venue">Evolving Systems</p><a href="https://doi.org/10.1007/s12530-026-09858-2" target="_blank" rel="noopener">Read publication ↗</a><br><span class="pub-label">Published</span></div>
+        </article>
+        <article class="pub">
+          <div class="year">2026</div>
+          <div><h3>Bayesian fuzzy optimization using Gaussian fuzzy process</h3><p>Sourav Das, Debdas Ghosh, Debjani Chakraborty, and Pabitra Mitra.</p><p class="venue">IEEE Access</p><a href="https://doi.org/10.1109/ACCESS.2026.3735156" target="_blank" rel="noopener">Read publication ↗</a><br><span class="pub-label">Published</span></div>
+        </article>
+        <article class="pub">
+          <div class="year">2026</div>
+          <div><h3>Bayesian optimization framework for dynamic portfolio allocation</h3><p>Sourav Das, Debjani Chakraborty, and Pabitra Mitra.</p><p class="venue">Journal manuscript</p><span class="pub-label" style="background:#fff4dc;color:#8b5a00">Communicated</span></div>
+        </article>
+        <article class="pub">
+          <div class="year">In progress</div>
+          <div><h3>Bayesian Modelling and Optimization of Dynamic Scheduling for Earth Observation Satellite</h3><p>Sourav Das, Pragya Gupta, Abhijit Chatterjee, Aishwaryaprajna, and Debjani Chakraborty.</p><p class="venue">Research in progress</p></div>
+        </article>
+        <article class="pub">
+          <div class="year">In progress</div>
+          <div><h3>MTRMOBO: Multiple Trust-Region Based Multi-objective Bayesian Optimization</h3><p>Sourav Das, Debjani Chakraborty, and Pabitra Mitra.</p><p class="venue">Research in progress</p></div>
+        </article>
+      </div>
+      <p style="color:var(--muted);font-size:.82rem;margin-top:14px">For the most up-to-date publication record, please also visit <a href="https://scholar.google.com/citations?user=tSssomIAAAAJ&amp;hl=en" target="_blank" rel="noopener">Google Scholar</a>.</p>
+    </section>
+
+    <section id="education">
+      <div class="section-head"><div class="kicker">Academic background</div><h2>Education & teaching</h2></div>
+      <div class="panel">
+        <div class="timeline">
+          <div class="timeline-item"><div class="date">2020 – Present</div><div><h3>Ph.D. in Mathematics</h3><p>Indian Institute of Technology Kharagpur · CGPA: 9.07/10</p><p>Research: Bayesian optimization, portfolio optimization, trust-region methods, multi-objective optimization, Gaussian processes, and machine learning.</p></div></div>
+          <div class="timeline-item"><div class="date">2018 – 2020</div><div><h3>M.Tech. in Computer Science and Data Processing</h3><p>Indian Institute of Technology Kharagpur · CGPA: 8.07/10</p></div></div>
+          <div class="timeline-item"><div class="date">2015 – 2017</div><div><h3>M.Sc. in Pure Mathematics</h3><p>University of Calcutta · 68.9%</p></div></div>
+          <div class="timeline-item"><div class="date">2012 – 2015</div><div><h3>B.Sc. in Mathematics</h3><p>Ramakrishna Mission Residential College, Narendrapur · 56.5%</p></div></div>
+        </div>
+      </div>
+      <div class="panel" style="margin-top:16px">
+        <h3 style="margin-top:0">Teaching experience</h3>
+        <p style="color:var(--muted);margin-bottom:0">Teaching assistant for Mathematics I and II, Nonlinear Programming (MATLAB), Database Management Systems (SQL), Programming in C, and Data Structures and Algorithms (Python/C++). Also contributed to NPTEL courses on Constrained and Unconstrained Optimization (2024) and Mathematics for Machine Learning (2025).</p>
+      </div>
+    </section>
+
+    <section id="skills">
+      <div class="section-head"><div class="kicker">Technical toolkit</div><h2>Methods, tools & expertise</h2></div>
+      <div class="skills-grid">
+        <div class="skill"><h3>Optimization & Statistics</h3><p>Bayesian optimization, multi-objective optimization, trust-region methods, Gaussian processes, probabilistic modelling, fuzzy optimization.</p></div>
+        <div class="skill"><h3>AI & Machine Learning</h3><p>Machine learning, deep learning, natural language processing, explainable AI, computer vision, synthetic data generation.</p></div>
+        <div class="skill"><h3>Programming</h3><p>Python, MATLAB, C, C++.</p></div>
+        <div class="skill"><h3>Scientific Computing</h3><p>NumPy, Pandas, SciPy, scikit-learn, SymPy, PyTorch, pymoo.</p></div>
+        <div class="skill"><h3>Research applications</h3><p>Portfolio allocation, satellite scheduling, uncertainty-aware decision-making, scarce and imbalanced datasets.</p></div>
+        <div class="skill"><h3>Academic service</h3><p>Teaching assistance, research communication, analytical problem solving, mentoring.</p></div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="contact">
+        <div><div class="kicker" style="color:#7dd3c7">Get in touch</div><h2 style="margin-top:7px">Let's discuss research.</h2><p>I'm happy to connect about Bayesian optimization, probabilistic modelling, mathematical optimization, and collaborative research.</p></div>
+        <a class="btn btn-primary" href="mailto:dassourav0151@gmail.com">Email me ↗</a>
+      </div>
+      <div class="tags" style="margin-top:20px;margin-bottom:12px">
+        <a class="tag" href="https://github.com/dassourav0151" target="_blank" rel="noopener">GitHub</a>
+        <a class="tag" href="https://scholar.google.com/citations?user=tSssomIAAAAJ&amp;hl=en" target="_blank" rel="noopener">Google Scholar</a>
+        <a class="tag" href="https://www.linkedin.com/in/sourav-das-376542b0/" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="tag" href="mailto:dassourav0151@gmail.com">Email</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span>© <span id="year"></span> Sourav Das. Built for research and collaboration.</span>
+    <div class="footer-links"><a href="#home">Back to top ↑</a><a href="https://github.com/dassourav0151" target="_blank" rel="noopener">GitHub</a><a href="https://scholar.google.com/citations?user=tSssomIAAAAJ&amp;hl=en" target="_blank" rel="noopener">Scholar</a></div>
+  </footer>
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+    const menuButton = document.getElementById("menuButton");
+    const navLinks = document.getElementById("navLinks");
+    menuButton.addEventListener("click", () => {
+      const isOpen = navLinks.classList.toggle("open");
+      menuButton.setAttribute("aria-expanded", String(isOpen));
+    });
+    navLinks.querySelectorAll("a").forEach(link => link.addEventListener("click", () => {
+      navLinks.classList.remove("open");
+      menuButton.setAttribute("aria-expanded", "false");
+    }));
+  </script>
+</body>
+</html>
